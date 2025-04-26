@@ -1,0 +1,118 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f7f7; /* Light gray background */
+    color: #333; /* Dark gray text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff; /* White content area */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 1000px;
+}
+
+h1, h2 {
+    color: #148F77; /* Safaricom Green */
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #148F77;
+    padding-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+button {
+    background-color: #0E6251; /* Darker Safaricom Green */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #19A974; /* Lighter Safaricom Green on hover */
+}
+
+a {
+    color: #2E86C1; /* Safaricom Blue-ish */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1B4F6F; /* Darker Blue on hover */
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.error {
+    color: #c0392b; /* Red for errors */
+    margin-top: 10px;
+}
+
+/* Specific styling for profile picture (if applicable) */
+.profile-picture-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 25px auto;
+    border: 4px solid #148F77; /* Safaricom Green border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e8f6f3; /* Light green background */
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

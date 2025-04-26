@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Profile: {{ client.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Client Profile: {{ client.name }}</h1>
+        <p>Age: {{ client.age }}</p>
+        <p>Health Record: {{ client.health_record or 'No information provided.' }}</p>
+
+        <h2>Enrolled Programs</h2>
+        {% if enrollments %}
+        <ul>
+            {% for enrollment in enrollments %}
+            <li>
+                {{ enrollment.program.name }} (Enrolled on: {{ enrollment.enrollment_date.strftime('%Y-%m-%d') }})
+                <form method="POST" action="{{ url_for('update_enrollment_status', enrollment_id=enrollment.id) }}">
+                    <div class="form-group">
+                        <label for="progress_status_{{ enrollment.id }}">Progress Status:</label>
+                        <input type="text" id="progress_status_{{ enrollment.id }}" name="progress_status" value="{{ enrollment.progress_status }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="consistency_track_{{ enrollment.id }}">Consistency Track:</label>
+                        <textarea id="consistency_track_{{ enrollment.id }}" name="consistency_track">{{ enrollment.consistency_track or '' }}</textarea>
+                    </div>
+                    <button type="submit">Update Status</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No programs enrolled yet.</p>
+        {% endif %}
+
+        <p><a href="{{ url_for('enroll_client', client_id=client.id) }}">Enroll in More Programs</a></p>
+        <p><a href="{{ url_for('doctor_dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

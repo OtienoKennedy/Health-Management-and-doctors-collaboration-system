@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Cancer Program</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Create New Cancer Program</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Program Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="stages">Stages (comma-separated):</label>
+                <textarea id="stages" name="stages" rows="5" placeholder="e.g., screening,therapy,radiotherapy,chemotherapy,surgery,survivor team" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration/Timing:</label>
+                <input type="text" id="duration" name="duration">
+            </div>
+            <button type="submit">Create Program</button>
+        </form>
+        <p><a href="{{ url_for('doctor_dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

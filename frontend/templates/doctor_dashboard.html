@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMA Cancer Specialist System - Doctor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .captivating-message {
+            font-size: 1.5em;
+            color: #148F77; /* Safaricom Green */
+            margin-bottom: 20px;
+        }
+
+        .blink {
+            animation: blinker 1s step-end infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container input[type="text"] {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .search-results {
+            margin-top: 15px;
+        }
+
+        .not-found {
+            color: #c0392b; /* Red */
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, Dr. {{ doctor.username }}!</h1>
+        <p class="captivating-message blink">My Duty Is To Make Life Better Healthwise</p>
+        <p><a href="{{ url_for('logout') }}">Logout</a></p>
+
+        <div class="search-container">
+            <form method="POST" action="{{ url_for('search_client') }}">
+                <input type="text" name="search_term" placeholder="Search for a patient by name or ID">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        {% if search_results %}
+        <div class="search-results">
+            <h2>Search Results</h2>
+            <ul>
+                {% for client in search_results %}
+                <li>{{ client.name }} (Age: {{ client.age }}) - <a href="{{ url_for('view_client_profile', client_id=client.id) }}">View Profile</a> - <a href="{{ url_for('enroll_client', client_id=client.id) }}">Enroll in Program</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% elif search_term %}
+            <p class="not-found">No patients found matching your search term.</p>
+        {% endif %}
+
+        <h2>Your Care Programs</h2>
+        <ul>
+            {% for program in cancer_programs %}
+            <li>{{ program.name }} - Stages: {{ program.stages }} ({{ program.duration }}) - <a href="#">Edit</a></li>
+            {% else %}
+            <li>No care programs have been created. Let's add one!</li>
+            {% endfor %}
+        </ul>
+        <p><a href="{{ url_for('create_cancer_program') }}">Create a New Care Program</a></p>
+
+        <h2>Your Patients</h2>
+        <ul>
+            {% for client in clients %}
+            <li>{{ client.name }} (Age {{ client.age }}) - <span class='action-links'><a href="{{ url_for('view_client_profile', client_id=client.id) }}">Profile</a> | <a href="{{ url_for('enroll_client', client_id=client.id) }}">Enroll</a></span></li>
+            {% else %}
+            <li>No patients in your system. Click to add a new patient.</li>
+            {% endfor %}
+        </ul>
+        <p><a href="{{ url_for('register_client') }}">Register a New Patient</a></p>
+
+        <h2>Your Reminders</h2>
+        <p>Upcoming appointments and reminders will appear here.</p>
+    </div>
+</body>
+</html>

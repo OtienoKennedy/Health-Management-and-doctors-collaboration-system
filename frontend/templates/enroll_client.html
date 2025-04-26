@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Client in Program</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Enroll Client: {{ client.name }}</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label>Select Programs:</label>
+                <ul>
+                    {% for program in cancer_programs %}
+                    <li>
+                        <input type="checkbox" id="program_{{ program.id }}" name="programs" value="{{ program.id }}">
+                        <label for="program_{{ program.id }}">{{ program.name }} - Stages: {{ program.stages }} ({{ program.duration }})</label>
+                    </li>
+                    {% else %}
+                    <li>No cancer programs available.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button type="submit">Enroll Client</button>
+        </form>
+        <p><a href="{{ url_for('view_client_profile', client_id=client.id) }}">Back to Client Profile</a></p>
+    </div>
+</body>
+</html>
